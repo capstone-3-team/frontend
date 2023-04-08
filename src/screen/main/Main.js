@@ -1,3 +1,9 @@
+/**
+ * 
+ *  메인화면 입니다.
+ * 
+ */
+
 import React, { useRef, useState } from 'react';
 import Styles from './Main.module.css';
 import SearchIcon from '@mui/icons-material/Search';
@@ -68,6 +74,11 @@ const Main = () => {
                 </div>
             </div>
             <Routes>
+                <Route
+                    exact
+                    path=''
+                    element={<p>나 자신이 쓴 글 목록</p>}
+                />
                 <Route
                     path='profile'
                     element={<Profile />}
