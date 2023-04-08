@@ -6,7 +6,7 @@
 
 import { Close } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import User from '../../state/User';
 
@@ -45,7 +45,7 @@ const Profile = () => {
                         <img src={user.profilePicture} className={Styles.topProfilePicture} />
                         <p className={Styles.topProfileName}>{user.googleName}</p>
                     </div>
-                    <Close className={Styles.topProfileClose} onClick={() => { navigate('./main') }} />
+                    <Close className={Styles.topProfileClose} onClick={() => {navigate('/main', {replace: true});}}/>
                 </div>
                 <textarea
                     defaultValue={profileText}
@@ -55,10 +55,10 @@ const Profile = () => {
                     className={Styles.profileText}
                 />
                 <div className={Styles.bottomProfileDiv}>
-                    <div className={Styles.bottomProfileButtonLogout} onClick={() => {alert("이론상 로그아웃"); navigate('/main') }}>
+                    <div className={Styles.bottomProfileButtonLogout} onClick={() => {alert("이론상 로그아웃"); navigate('/main', {replace: true});}}>
                         <p>로그아웃</p>
                     </div>
-                    <div className={Styles.bottomProfileButtonChange} onClick={() => {updateData(); navigate('/main');}}>
+                    <div className={Styles.bottomProfileButtonChange} onClick={() => {updateData(); navigate('/main', {replace: true});}}>
                         <p>프로필 문구 수정 완료</p>
                     </div>
                 </div>
