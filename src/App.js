@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import User from './state/User';
 import Login from './screen/login/Login';
@@ -19,9 +19,29 @@ const App = () => {
             element={
               user.token.length === 0
               ?
-              <Login />
+              <Navigate replace to={"/login"} />
+              :
+              <Navigate replace to={"/main"} />
+            }
+          />
+          <Route
+            path='/main/*'
+            element={
+              user.token.length === 0
+              ?
+              <Navigate replace to={"/login"} />
               :
               <Main />
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              user.token.length === 0
+              ?
+              <Login />
+              :
+              <Navigate replace to={"/main"} />
             }
           />
         </Routes>
