@@ -9,12 +9,12 @@ import Styles from './Main.module.css';
 import SearchIcon from '@mui/icons-material/Search';
 
 import Logo from '../../assets/images/logo.png';
-import ChatGPT from '../../assets/images/chatgpt.png';
 import { Link, Route, Routes } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import User from '../../state/User';
 import {useNavigate} from 'react-router-dom';
 import Profile from './Profile';
+import CardWriting from './CardWriting';
 
 
 const Main = () => {
@@ -38,7 +38,7 @@ const Main = () => {
                         className={Styles.topSearchInput} 
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                navigate('/main/search');
+                                navigate('/main/search', {replace: true});
                                 setSearch(inputRef.current.value);
                             }
                         }}
@@ -47,7 +47,7 @@ const Main = () => {
                 <div 
                     className={Styles.topWriteNewCard}
                     onClick={() => {
-                        navigate('/main/write')
+                        navigate('/main/write', {replace: true})
                     }}
                 >
                 <p className={Styles.topWriteNewCardText}>새 카드 작성하기</p>
@@ -55,7 +55,7 @@ const Main = () => {
                 <div
                     className={Styles.topProfilePictureDiv}
                     onClick={() => {
-                        navigate('/main/profile')
+                        navigate('/main/profile', {replace: true})
                     }}
                 >
                     <img src={user.profilePicture} className={Styles.topProfilePicture}/>
@@ -69,26 +69,37 @@ const Main = () => {
                     element={<p>나 자신이 쓴 글 목록</p>}
                 />
                 <Route
-                    path='profile'
+                    exact
+                    path='/profile'
                     element={<Profile />}
                 />
                 <Route
-                    path='search'
+                    exact
+                    path='/search'
                     element={<p>{`${search} 를 검색하려 시도 했습니다.`}</p>}
                 />
                 <Route
-                    path='write'
-                    element={<p>새 카드 작성하기</p>}
+                    exact
+                    path='/write'
+                    element={<CardWriting />}
                 />
                 <Route
-                    path='card/:id'
+                    exact
+                    path='/correction/:id'
+                    element={<p>자신의 카드를 수정합니다</p>}
+                />
+                <Route
+                    exact
+                    path='/card/:id'
                     element={<p>내 카드 읽기</p>}
                 />
                 <Route
-                    path='card/user/:userId'
+                    exact
+                    path='/card/user/:userId'
                     element={<p>다른사람 카드 목록</p>}
                 />
                 <Route
+                    exact
                     path='card/user/:userId/:id'
                     element={<p>다른사람 카드 읽기</p>}
                 />
