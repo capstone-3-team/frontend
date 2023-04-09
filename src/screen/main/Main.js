@@ -61,17 +61,6 @@ const Main = () => {
                     <img src={user.profilePicture} className={Styles.topProfilePicture}/>
                     <p className={Styles.topProfilePictureName}>{user.googleName}</p>
                 </div>
-                <div 
-                    className={Styles.topChatGPTDiv}
-                    onClick={
-                        () => {
-                            navigate('/main/chatgpt')
-                        }
-                    }
-                >
-                    <img src={ChatGPT} className={Styles.topChatGPTLogo}/>
-                    <p className={Styles.topChatGPTText}>CHATGPT에게 물어보기</p>
-                </div>
             </div>
             <Routes>
                 <Route
@@ -90,10 +79,6 @@ const Main = () => {
                 <Route
                     path='write'
                     element={<p>새 카드 작성하기</p>}
-                />
-                <Route
-                    path='chatgpt'
-                    element={<p>ChatGPT에 물어보기</p>}
                 />
                 <Route
                     path='card/:id'
