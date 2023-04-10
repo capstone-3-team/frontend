@@ -22,7 +22,8 @@ const CardWriting = () => {
 
     const [adding, setAdding] = useState(false);
 
-    const newHashtagRef = useRef();
+    const newHashtagRef = useRef(null);
+    const titleRef = useRef(null);
 
     return (
         <div className={Styles.backdrop}>
@@ -32,6 +33,7 @@ const CardWriting = () => {
                         className={Styles.topTitleInput}
                         size={40}
                         placeholder={"제목을 입력해주세요"}
+                        ref={titleRef}
                     />
                     <Close 
                         className={Styles.topClose}
@@ -159,8 +161,12 @@ const CardWriting = () => {
                 <div 
                     className={Styles.bottomCompleteDiv}
                     onClick={() => {
-                        alert('서버에 글을 보내는 작업이 수반됩니다.');
-                        navigate('/main', {replace: false});
+                        if(titleRef.current.value == "" || value == "") {
+                            alert('제목과 글은 빈칸이여선 안됩니다.');
+                        } else {
+                            alert('서버에 글을 보내는 작업이 수반됩니다.');
+                            navigate('/main', {replace: false});
+                        }
                     }}
                 >
                     <span>작성 완료</span>
