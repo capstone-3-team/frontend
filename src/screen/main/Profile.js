@@ -50,7 +50,7 @@ const Profile = () => {
                 <textarea
                     defaultValue={profileText}
                     ref={inputRef}
-                    cols={100}
+                    cols={60}
                     rows={5}
                     className={Styles.profileText}
                 />
