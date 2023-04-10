@@ -25,6 +25,22 @@ const CardWriting = () => {
     const newHashtagRef = useRef(null);
     const titleRef = useRef(null);
 
+    const fetchCard = async () => {
+        const cardData = {
+            title: titleRef.current.value,
+            content: value,
+            hashTags: hashtags,
+            userId: 0,
+            writtenDate: new Date(),
+            latestReviewDate: new Date(),
+            reviewCount: 0,
+        }
+        await fetch('https://software-engineering-3team-default-rtdb.firebaseio.com/cards.json', {
+            method: 'POST',
+            body: JSON.stringify(cardData),
+        });
+    }
+
     return (
         <div className={Styles.backdrop}>
             <div className={Styles.writingDiv}>
@@ -105,6 +121,7 @@ const CardWriting = () => {
                                 (item, index) => {
                                     return (
                                         <div 
+                                            key={item}
                                             className={Styles.bottomHashtagItem}
                                             onClick={() => {
                                                 setHashtags(prev => {
@@ -164,7 +181,7 @@ const CardWriting = () => {
                         if(titleRef.current.value == "" || value == "") {
                             alert('제목과 글은 빈칸이여선 안됩니다.');
                         } else {
-                            alert('서버에 글을 보내는 작업이 수반됩니다.');
+                            fetchCard();
                             navigate('/main', {replace: false});
                         }
                     }}

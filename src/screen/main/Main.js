@@ -15,6 +15,7 @@ import User from '../../state/User';
 import {useNavigate} from 'react-router-dom';
 import Profile from './Profile';
 import CardWriting from './CardWriting';
+import MyCards from './MyCards';
 
 
 const Main = () => {
@@ -62,48 +63,48 @@ const Main = () => {
                     <p className={Styles.topProfilePictureName}>{user.googleName}</p>
                 </div>
             </div>
-            <Routes>
-                <Route
-                    exact
-                    path=''
-                    element={<p>나 자신이 쓴 글 목록</p>}
-                />
-                <Route
-                    exact
-                    path='/profile'
-                    element={<Profile />}
-                />
-                <Route
-                    exact
-                    path='/search'
-                    element={<p>{`${search} 를 검색하려 시도 했습니다.`}</p>}
-                />
-                <Route
-                    exact
-                    path='/write'
-                    element={<CardWriting />}
-                />
-                <Route
-                    exact
-                    path='/correction/:id'
-                    element={<p>자신의 카드를 수정합니다</p>}
-                />
-                <Route
-                    exact
-                    path='/card/:id'
-                    element={<p>내 카드 읽기</p>}
-                />
-                <Route
-                    exact
-                    path='/card/user/:userId'
-                    element={<p>다른사람 카드 목록</p>}
-                />
-                <Route
-                    exact
-                    path='card/user/:userId/:id'
-                    element={<p>다른사람 카드 읽기</p>}
-                />
-            </Routes>
+                <Routes>
+                    <Route
+                        exact
+                        path=''
+                        element={<MyCards />}
+                    />
+                    <Route
+                        exact
+                        path='/profile'
+                        element={<Profile />}
+                    />
+                    <Route
+                        exact
+                        path='/search'
+                        element={<p>{`${search} 를 검색하려 시도 했습니다.`}</p>}
+                    />
+                    <Route
+                        exact
+                        path='/write'
+                        element={<CardWriting />}
+                    />
+                    <Route
+                        exact
+                        path='/correction/:id'
+                        element={<p>자신의 카드를 수정합니다</p>}
+                    />
+                    <Route
+                        exact
+                        path='/card/:id'
+                        element={<p>내 카드 읽기</p>}
+                    />
+                    <Route
+                        exact
+                        path='/card/user/:userId'
+                        element={<p>다른사람 카드 목록</p>}
+                    />
+                    <Route
+                        exact
+                        path='card/user/:userId/:id'
+                        element={<p>다른사람 카드 읽기</p>}
+                    />
+                </Routes>
         </div>
     )
 }
