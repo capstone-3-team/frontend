@@ -3,6 +3,7 @@ import { TailSpin } from 'react-loader-spinner';
 
 import Styles from './MyCards.module.css';
 import Card from '../../components/Card';
+import { useSearchParams } from 'react-router-dom';
 
 const MyCards = () => {
 
@@ -34,6 +35,7 @@ const MyCards = () => {
                     radius="1"
                     wrapperStyle={{}}
                     wrapperClass=""
+                    style={{ whiteSpace: 'pre-wrap' }}
                     visible={true}
                 />
             </div>
@@ -48,7 +50,7 @@ const MyCards = () => {
             <div className={Styles.cardsDiv}>
                 {
                     cards.map((item) => {
-                        return <Card key={item.writtenDate} card={item} style={{width: '280px', margin: '0px 30px 30px 0px'}}/>
+                        return <Card key={item.writtenDate.toString()} card={item} style={{width: '280px', margin: '0px 30px 30px 0px'}}/>
                     })
                 }
             </div>

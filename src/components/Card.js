@@ -6,8 +6,6 @@ import Styles from './Card.module.css';
 
 const Card = (props) => {
 
-    console.log(props.card);
-
     const card = props.card;
 
     return (
@@ -28,7 +26,7 @@ const Card = (props) => {
                 {
                     card.hashTags.map(
                         item => {
-                            return <p className={Styles.hashtag}>#{item}</p>
+                            return <p key={item} className={Styles.hashtag}>#{item}</p>
                         }
                     )
                 }
