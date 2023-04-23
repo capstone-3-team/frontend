@@ -46,17 +46,17 @@ const GPT = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const URI = "https://proxy.cors.sh/https://gookproxy-coomlemon.hf.space/proxy/openai/chat/completions"
+    const URI = "https://gookproxy-coomlemon.hf.space/proxy/openai/chat/completions"
     const body = {
         model : "gpt-3.5-turbo",
         messages: [
                 {
-                    "role": "system", 
-                    "content": "당신은 컴퓨터 과학을 가르키는 교수입니다."
+                    role: "system", 
+                    content: "당신은 컴퓨터 과학을 가르키는 교수입니다."
                 },
                 {
-                    "role": "user", 
-                    "content": "질문이 여기에 들어갑니다."
+                    role: "user", 
+                    content: "질문이 여기에 들어갑니다."
                 }
             ],
         temperature: 0.7,
@@ -65,17 +65,22 @@ const GPT = () => {
     const queryToGpt = async () => {
         body.messages[1].content = questionRef.current.value;
         const answer = await fetch(URI, {
-            credentials: 'include',
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
-                'x-cors-api-key': 'test_bd61bb5d323e68d2ef1e961f09b6f95afc6c61ab6ba8b71801c843551f2b1a8b',
-                'origin': 'quickthink.online',
+                "Content-Type": "application/json",
+            },
+            mode: 'cors',
+        }).then(
+            (response) => response.json()
+        ).then(
+            (js) => {
+                console.log(js)
+                questionRef.current.value="";
+                setAnswers(prev => [...prev, js['choices'][0]['message']['content']]);
+                setLoading(false)
             }
-        });
-        console.log(answer)
-        questionRef.current.value="";
-        setAnswers(prev => [...prev, answer.status]);
+        )
     }
 
     return (
@@ -119,6 +124,18 @@ const GPT = () => {
                                                     <p>{answers[index]}</p>
                                                 }
                                             </div>
+                                            {
+                                                answers[index] !== undefined
+                                                &&
+                                                <button 
+                                                    className={Styles.cardWrite}
+                                                    onClick={() => {
+                                                        navigate(`/main/write?content=${answers[index]}`);
+                                                    }}
+                                                >
+                                                    카드 작성하기
+                                                </button>
+                                            }
                                         </div>
                                     </div>
                                 )
@@ -139,7 +156,6 @@ const GPT = () => {
                                 setLoading(true);
                                 setQuestions(prev => {prev = [...prev, questionRef.current.value]; console.log(prev); return prev;})
                                 queryToGpt();
-                                setLoading(false);
                             }
                         }}
                     />
@@ -155,7 +171,6 @@ const GPT = () => {
                                 setLoading(true);
                                 setQuestions(prev => {prev = [...prev, questionRef.current.value]; console.log(prev); return prev;})
                                 queryToGpt();
-                                setLoading(false);
                             }
                         }
                     >전송하기</button>

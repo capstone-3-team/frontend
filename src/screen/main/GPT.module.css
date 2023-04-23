@@ -50,6 +50,7 @@
 }
 
 .questionDiv {
+    max-width: 400px;
     align-self: flex-end;
     margin: 10px;
     padding: 10px 15px;
@@ -62,6 +63,7 @@
 
 .answerDiv {
     align-self: flex-start;
+    max-width: 600px;
 }
 
 .answer {
@@ -72,6 +74,16 @@
     font-weight: bold;
     box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+}
+
+.cardWrite {
+    border: 0px;
+    margin: 0px 0px 0px 10px;
+    background-color: #0057FFAA;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .chatInputDiv {
