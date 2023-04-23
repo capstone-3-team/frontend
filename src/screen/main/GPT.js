@@ -69,8 +69,8 @@ const GPT = () => {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
-                'x-cors-api-key': 'temp_c909b3dca6b242ebf9b7a9c7c709eeb4',
-                'origin': 'gookproxy-coomlemon.hf.space',
+                'x-cors-api-key': 'test_bd61bb5d323e68d2ef1e961f09b6f95afc6c61ab6ba8b71801c843551f2b1a8b',
+                'origin': 'quickthink.online',
             }
         });
         console.log(answer)
