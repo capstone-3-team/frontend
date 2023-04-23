@@ -1,6 +1,6 @@
 import { Add, Close } from '@mui/icons-material';
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Styles from './CardWriting.module.css';
 
@@ -14,13 +14,16 @@ const CardWriting = () => {
 
     const navigate = useNavigate();
 
-    const [value, setValue] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [value, setValue] = useState(searchParams.get('content') ?? "");
 
     const [tip, setTip] = useState(false);
 
     const [hashtags, setHashtags] = useState(["해시태그 예시", "클릭해 보세요"]);
 
     const [adding, setAdding] = useState(false);
+
 
     const newHashtagRef = useRef(null);
     const titleRef = useRef(null);
@@ -76,6 +79,7 @@ const CardWriting = () => {
                         value={value}
                         onChange={setValue}
                         className={Styles.editor}
+                        style={{ whiteSpace: 'pre-wrap' }}
                         previewOptions={{
                             rehypePlugins: [[rehypeSanitize]],
                             components: {
@@ -87,7 +91,6 @@ const CardWriting = () => {
                                         throwOnError: false,
                                         output: 'mathml'
                                       });
-                                      console.log(html);
                                       return <code dangerouslySetInnerHTML={{ __html: html }} />;
                                     }
                                     return <code>{txt}</code>;

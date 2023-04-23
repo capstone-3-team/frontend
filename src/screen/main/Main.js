@@ -16,6 +16,8 @@ import {useNavigate} from 'react-router-dom';
 import Profile from './Profile';
 import CardWriting from './CardWriting';
 import MyCards from './MyCards';
+import ChatGPT from '../../assets/images/chatgpt.png'
+import GPT from './GPT';
 
 
 const Main = () => {
@@ -62,12 +64,28 @@ const Main = () => {
                     <img src={user.profilePicture} className={Styles.topProfilePicture}/>
                     <p className={Styles.topProfilePictureName}>{user.googleName}</p>
                 </div>
+                <div 
+                    className={Styles.topChatGPTDiv}
+                    onClick={
+                        () => {
+                            navigate('/main/chatgpt', {replace: true})
+                        }
+                    }
+                >
+                    <img src={ChatGPT} className={Styles.topChatGPTLogo}/>
+                    <p className={Styles.topChatGPTText}>CHATGPT에게 물어보기</p>
+                </div>
             </div>
                 <Routes>
                     <Route
                         exact
                         path=''
                         element={<MyCards />}
+                    />
+                    <Route
+                        exact
+                        path='chatgpt'
+                        element={<GPT />}
                     />
                     <Route
                         exact
