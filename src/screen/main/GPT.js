@@ -6,6 +6,8 @@ import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 
 import Styles from './GPT.module.css';
+import MDEditor from '@uiw/react-md-editor';
+
 
 /*
 
@@ -46,7 +48,7 @@ const GPT = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const URI = "https://gookproxy-coomlemon.hf.space/proxy/openai/chat/completions"
+    const URI = "https://maceter636-8874416364.hf.space/proxy/openai/v1/chat/completions"
     const body = {
         model : "gpt-3.5-turbo",
         messages: [
@@ -77,7 +79,7 @@ const GPT = () => {
             (js) => {
                 console.log(js)
                 questionRef.current.value="";
-                setAnswers(prev => [...prev, js['choices'][0]['message']['content']]);
+                setAnswers(prev => [...prev, js['choices'][0]['message']['content'].replace('\n\n', '\n')]);
                 setLoading(false)
             }
         )
@@ -121,7 +123,7 @@ const GPT = () => {
                                                         visible={true}
                                                     />
                                                     :
-                                                    <p>{answers[index]}</p>
+                                                    <MDEditor.Markdown source={answers[index]} style={{ whiteSpace: 'pre-wrap', backgroundColor: 'transparent' }}  />
                                                 }
                                             </div>
                                             {
