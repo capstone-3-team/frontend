@@ -79,7 +79,8 @@ const GPT = () => {
             (js) => {
                 console.log(js)
                 questionRef.current.value="";
-                setAnswers(prev => [...prev, js['choices'][0]['message']['content'].replace('\n\n', '\n')]);
+                let rawAnswer = js['choices'][0]['message']['content'].replace('\n\n', '\n');
+                setAnswers(prev => [...prev, rawAnswer]);
                 setLoading(false)
             }
         )
@@ -132,7 +133,8 @@ const GPT = () => {
                                                 <button 
                                                     className={Styles.cardWrite}
                                                     onClick={() => {
-                                                        navigate(`/main/write?content=${answers[index]}`);
+                                                        console.log(answers[index]);
+                                                        navigate(`/main/write?content=${answers[index]}`, { state: { content: answers[index] } });
                                                     }}
                                                 >
                                                     카드 작성하기

@@ -1,6 +1,6 @@
 import { Add, Close } from '@mui/icons-material';
 import React, { useRef, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import Styles from './CardWriting.module.css';
 
@@ -14,9 +14,9 @@ const CardWriting = () => {
 
     const navigate = useNavigate();
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const {state} = useLocation();
 
-    const [value, setValue] = useState(searchParams.get('content') ?? "");
+    const [value, setValue] = useState(state.content ?? "");
 
     const [tip, setTip] = useState(false);
 
