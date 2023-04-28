@@ -16,7 +16,9 @@ const CardWriting = () => {
 
     const {state} = useLocation();
 
-    const [value, setValue] = useState(state.content ?? "");
+    console.log(state);
+
+    const [value, setValue] = useState(state == null ? "" : state.content);
 
     const [tip, setTip] = useState(false);
 

@@ -110,17 +110,12 @@ const Main = () => {
                     <Route
                         exact
                         path='/card/:id'
-                        element={<p>내 카드 읽기</p>}
+                        element={<p>내 카드 혹은 다른사람 카드 읽기</p>}
                     />
                     <Route
                         exact
                         path='/card/user/:userId'
                         element={<p>다른사람 카드 목록</p>}
-                    />
-                    <Route
-                        exact
-                        path='card/user/:userId/:id'
-                        element={<p>다른사람 카드 읽기</p>}
                     />
                 </Routes>
         </div>
