@@ -20,7 +20,7 @@ const Card = (props) => {
                 <Circle />
             </div>
             <div className={Styles.articleDiv}>
-                <MDEditor.Markdown source={card.content} style={{ whiteSpace: 'pre-wrap' }}  />
+                <MDEditor.Markdown source={card.content} style={{ whiteSpace: 'pre-wrap', backgroundColor: 'transparent' }}  />
             </div>
             <div className={Styles.hashtagsDiv}>
                 {
@@ -30,6 +30,9 @@ const Card = (props) => {
                         }
                     )
                 }
+            </div>
+            <div>
+                
             </div>
         </div>
     )

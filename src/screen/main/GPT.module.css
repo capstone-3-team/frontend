@@ -11,12 +11,14 @@
 }
 
 .gptDiv {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border: 0px transparent solid;
     border-radius: 10px;
     padding: 10px 20px;
     width: 1000px;
-    height: 80%;
+    height: 800px;
     min-height: 600px; 
 }
 
@@ -38,10 +40,11 @@
 }
 
 .chatDiv {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: 80%;
-    background-color: #F5F5F5;
+    height: 100px;
+    background-color: #F5F5F5AA;
     box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow-y:scroll;
@@ -119,4 +122,8 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.chatButton:hover {
+    background-color: #387aff;
 }
