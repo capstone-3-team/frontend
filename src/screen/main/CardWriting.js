@@ -9,6 +9,11 @@ import rehypeSanitize from "rehype-sanitize";
 import { getCodeString } from 'rehype-rewrite';
 import katex from 'katex';
 
+import User from '../../state/User';
+import { useRecoilValue } from 'recoil';
+
+import Backend, {axios_wtoken} from '../../axios/Backend';
+
 
 const CardWriting = () => {
 
@@ -22,9 +27,11 @@ const CardWriting = () => {
 
     const [tip, setTip] = useState(false);
 
-    const [hashtags, setHashtags] = useState(["해시태그 예시", "클릭해 보세요"]);
+    const [hashtags, setHashtags] = useState([]);
 
     const [adding, setAdding] = useState(false);
+
+    const user = useRecoilValue(User);
 
 
     const newHashtagRef = useRef(null);
@@ -35,14 +42,17 @@ const CardWriting = () => {
             title: titleRef.current.value,
             content: value,
             hashTags: hashtags,
-            userId: 0,
             writtenDate: new Date(),
             latestReviewDate: new Date(),
             reviewCount: 0,
         }
-        await fetch('https://software-engineering-3team-default-rtdb.firebaseio.com/cards.json', {
+        console.log(JSON.stringify(cardData))
+        await Backend('card/write', {
             method: 'POST',
-            body: JSON.stringify(cardData),
+            headers: {
+                accessToken: user.token,
+            },
+            data: JSON.stringify(cardData)
         });
     }
 

@@ -1,20 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
+
 import User from '../../state/User';
+import Styles from './Login.module.css';
+import Logo from '../../assets/images/logo.png';
+import LoginImage from '../../assets/images/google_login.png'
+import { useEffect } from 'react';
+import Backend from '../../axios/Backend';
 
 const Login = () => {
 
     const [user, setUser] = useRecoilState(User);
-    // 로그인 상태 수정을 위한 Recoil state.
 
-    const firstLogin = false;
-    // 로그인 절차를 거친 뒤, 백엔드에서 유저가 첫번째로 로그인 한 것인지 여부를 파악하고 프로필 설정으로 갈지, 메인화면으로 갈지를 결정한다.
+    let win = null;
 
-    return (
-        <div>
-            <p>Login screen here</p>
-        </div>
-    )
+    useEffect(() => {
+        const interval = setInterval(
+            async () => {
+                if(document.cookie !== "") {
+                    const token = document.cookie.replace("data=", "");
+                    const userData = await (await Backend("info", {method:"GET", headers: {accessToken: token}})).data;
+                    setUser({
+                        token: token,
+                        googleId: userData.googleId,
+                        googleName: userData.googleName,
+                        profilePicture: userData.profilePicture,
+                    })
+                    win.close();
+                }
+            }, 100
+        )
+        return () => {
+            clearInterval(interval);
+        }
+    }, [])
+
+    const [screen, setScreen] = useState("init");
+
+    if(screen === "init") {
+        return (
+            <div className={Styles.mainDiv}>
+                <img src={Logo} className={Styles.mainLogo} />
+                <p className={Styles.mainText}>서비스 사용을 위해 구글 로그인을 해 주세요</p>
+                <img src={LoginImage} className={Styles.loginImage} onClick={() => {
+                    win = window.open('http://localhost:8080/api/google', "PopupWin", "width=500,height=600")
+                }}/>
+            </div>
+        )
+    }
 }
 
 export default Login;

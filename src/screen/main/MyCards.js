@@ -4,18 +4,25 @@ import { TailSpin } from 'react-loader-spinner';
 import Styles from './MyCards.module.css';
 import Card from '../../components/Card';
 import { useSearchParams } from 'react-router-dom';
+import Backend from '../../axios/Backend';
+import { useRecoilValue } from 'recoil';
+import User from '../../state/User';
 
 const MyCards = () => {
 
     const [cards, setCards] = useState([]);
+    const user = useRecoilValue(User);
+    const [isLoading, setLoading] = useState(true);
 
     const fetchCards = async () => {
-        const data = await (await fetch("https://software-engineering-3team-default-rtdb.firebaseio.com/cards.json", {method: 'GET'})).json();
+        const data = await Backend("card", {method: 'GET', headers: { "Content-Type": "application.json", accessToken: user.token }, params: {googleId: user.googleId}});
         const writings = []
-        for(const d in data) {
-            writings.push(data[d])
+        for(const d in data.cards) {
+            console.log(d);
+            writings.push(d)
         }
         setCards(writings)
+        setLoading(false);
     }
 
     useEffect(
@@ -24,7 +31,7 @@ const MyCards = () => {
         }
     , []);
 
-    if(cards.length === 0) {
+    if(isLoading) {
         return (
             <div className={Styles.spinnerDiv}>
                 <TailSpin
