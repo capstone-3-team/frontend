@@ -18,6 +18,10 @@ import CardWriting from './CardWriting';
 import MyCards from './MyCards';
 import ChatGPT from '../../assets/images/chatgpt.png'
 import GPT from './GPT';
+import CardReading from './CardReading';
+import CardEditing from './CardEditing';
+import SearchPeople from './SearchPeople';
+import OthersCard from './OthersCard';
 
 
 const Main = () => {
@@ -41,8 +45,7 @@ const Main = () => {
                         className={Styles.topSearchInput} 
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                navigate('/main/search', {replace: true});
-                                setSearch(inputRef.current.value);
+                                navigate('/main/search', {replace: true, state: {search: inputRef.current.value}});
                             }
                         }}
                     />
@@ -89,33 +92,33 @@ const Main = () => {
                     />
                     <Route
                         exact
-                        path='/profile'
+                        path='profile'
                         element={<Profile />}
                     />
                     <Route
                         exact
-                        path='/search'
-                        element={<p>{`${search} 를 검색하려 시도 했습니다.`}</p>}
+                        path='search'
+                        element={<SearchPeople />}
                     />
                     <Route
                         exact
-                        path='/write'
+                        path='write'
                         element={<CardWriting />}
                     />
                     <Route
                         exact
-                        path='/correction/:id'
-                        element={<p>자신의 카드를 수정합니다</p>}
+                        path='correction/:id'
+                        element={<CardEditing />}
                     />
                     <Route
                         exact
-                        path='/card/:id'
-                        element={<p>내 카드 혹은 다른사람 카드 읽기</p>}
+                        path='card/:id'
+                        element={<CardReading />}
                     />
-                    <Route
+                    <Route 
                         exact
-                        path='/card/user/:userId'
-                        element={<p>다른사람 카드 목록</p>}
+                        path='card/user/:id'
+                        element={<OthersCard />}
                     />
                 </Routes>
         </div>

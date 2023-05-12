@@ -1,8 +1,8 @@
 import { Add, Close } from '@mui/icons-material';
 import React, { useRef, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import Styles from './CardWriting.module.css';
+import Styles from './CardEditing.module.css';
 
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
@@ -12,18 +12,17 @@ import katex from 'katex';
 import User from '../../state/User';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
-import Backend, {axios_wtoken} from '../../axios/Backend';
+import Backend from '../../axios/Backend';
+import { useEffect } from 'react';
 
 
-const CardWriting = () => {
+const CardEditing = () => {
 
     const navigate = useNavigate();
 
-    const {state} = useLocation();
+    const [title, setTitle] = useState("");
 
-    console.log(state);
-
-    const [value, setValue] = useState(state == null ? "" : state.content);
+    const [value, setValue] = useState("");
 
     const [tip, setTip] = useState(false);
 
@@ -37,25 +36,59 @@ const CardWriting = () => {
 
     const titleRef = useRef(null);
 
+    const { id } = useParams()
+
     const resetUser = useResetRecoilState(User);
 
+    useEffect(() => {
+        fetchCard();
+    }, [])
+
     const fetchCard = async () => {
+        let data = await Backend('card/single',{
+            method: "GET",
+            headers: {
+                accessToken: user.token,
+            },
+            params: {
+                cardId: id
+            }
+        });
+
+        if(data.status == 401) {
+            resetUser();
+        }
+
+        data = data.data;
+        
+        setTitle(data.title);
+        setValue(data.content);
+        setHashtags(data.hashTags);
+
+    }
+
+    const putCard = async () => {
+
+        console.log(hashtags);
+
         const cardData = {
             title: titleRef.current.value,
             content: value,
             hashTags: hashtags,
             writtenDate: new Date(),
-            latestReviewDate: new Date(),
-            reviewCount: 0,
         }
-        console.log(JSON.stringify(cardData))
-        const output = await Backend('card/write', {
-            method: 'POST',
+
+        const output = await Backend('card/edit', {
+            method: 'PUT',
             headers: {
                 accessToken: user.token,
             },
+            params: {
+                cardId: id,
+            },
             data: JSON.stringify(cardData)
         });
+
         if(output.status == 401) {
             resetUser();
         }
@@ -68,7 +101,7 @@ const CardWriting = () => {
                     <input 
                         className={Styles.topTitleInput}
                         size={40}
-                        placeholder={"제목을 입력해주세요"}
+                        defaultValue={title}
                         ref={titleRef}
                     />
                     <Close 
@@ -201,16 +234,16 @@ const CardWriting = () => {
                         if(titleRef.current.value == "" || value == "") {
                             alert('제목과 글은 빈칸이여선 안됩니다.');
                         } else {
-                            fetchCard();
+                            putCard();
                             navigate('/main', {replace: false});
                         }
                     }}
                 >
-                    <span>작성 완료</span>
+                    <span>수정 완료</span>
                 </div>
             </div>
         </div>
     )
 }
 
-export default CardWriting;
+export default CardEditing;

@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import User from './state/User';
 import Login from './screen/login/Login';
 import Main from './screen/main/Main';
+import CallBack from './Callback';
 import './App.css';
 
 const App = () => {
@@ -13,6 +14,13 @@ const App = () => {
     <div>
       <Router>
         <Routes>
+          <Route 
+            exact
+            path='/callback'
+            element={
+              <CallBack />
+            }
+          />
           <Route
             exact
             path='/'           
