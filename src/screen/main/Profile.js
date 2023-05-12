@@ -7,7 +7,7 @@
 import { Close } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
 
 import Styles from './Profile.module.css';
@@ -15,6 +15,8 @@ import Styles from './Profile.module.css';
 const Profile = () => {
 
     const [user, setUser] = useRecoilState(User);
+
+    const resetUser = useResetRecoilState(User);
 
     const navigate = useNavigate();
 
@@ -55,7 +57,10 @@ const Profile = () => {
                     className={Styles.profileText}
                 />
                 <div className={Styles.bottomProfileDiv}>
-                    <div className={Styles.bottomProfileButtonLogout} onClick={() => {alert("이론상 로그아웃"); navigate('/main', {replace: true});}}>
+                    <div className={Styles.bottomProfileButtonLogout} onClick={() => {
+                            resetUser();
+                            navigate('/main', {replace: true});
+                        }}>
                         <p>로그아웃</p>
                     </div>
                     <div className={Styles.bottomProfileButtonChange} onClick={() => {updateData(); navigate('/main', {replace: true});}}>
