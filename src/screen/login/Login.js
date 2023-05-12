@@ -43,7 +43,7 @@ const Login = () => {
                 <img src={Logo} className={Styles.mainLogo} />
                 <p className={Styles.mainText}>서비스 사용을 위해 구글 로그인을 해 주세요</p>
                 <img src={LoginImage} className={Styles.loginImage} onClick={() => {
-                    win = window.open('http://localhost:8080/api/google', "PopupWin", "width=500,height=600")
+                    win = window.open('http://api.alphaorderly.com:8080/api/google', "PopupWin", "width=500,height=600")
                 }}/>
             </div>
         )
