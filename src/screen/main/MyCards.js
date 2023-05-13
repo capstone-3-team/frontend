@@ -3,7 +3,6 @@ import { TailSpin } from 'react-loader-spinner';
 
 import Styles from './MyCards.module.css';
 import Card from '../../components/Card';
-import { useSearchParams } from 'react-router-dom';
 import Backend from '../../axios/Backend';
 import { useRecoilValue } from 'recoil';
 import User from '../../state/User';
@@ -17,9 +16,8 @@ const MyCards = () => {
     const fetchCards = async () => {
         let data = await Backend("card", {method: 'GET', headers: { "Content-Type": "application.json", accessToken: user.token }, params: { googleId: user.googleId }});
         data = data.data;
-        console.log(data);
         const writings = []
-        for(const d in data.cards) {
+        for(const d of data.cards) {
             console.log(d);
             writings.push(d)
         }
