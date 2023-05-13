@@ -26,8 +26,14 @@ const Login = () => {
         win.close();
     }
 
+    const [refreshed, setRefreshed] = useState(false);
+
     useEffect(() => {
+        setRefreshed(true);
         document.location.reload();
+    }, []);
+
+    useEffect(() => {
         const interval = setInterval(
             () => {
                 console.log(document.cookie)
