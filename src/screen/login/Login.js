@@ -29,9 +29,11 @@ const Login = () => {
     const [refreshed, setRefreshed] = useState(false);
 
     useEffect(() => {
-        setRefreshed(true);
-        document.location.reload();
-    }, [refreshed]);
+        if(refreshed === false) {
+            setRefreshed(true);
+            document.location.reload();
+        }
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(
