@@ -15,7 +15,7 @@ const MyCards = () => {
     const [isLoading, setLoading] = useState(true);
 
     const fetchCards = async () => {
-        const data = await Backend("card", {method: 'GET', headers: { "Content-Type": "application.json", accessToken: user.token }, params: { googleId: user.googleId }})["data"];
+        const data = await Backend("card", {method: 'GET', headers: { "Content-Type": "application.json", accessToken: user.token }, params: { googleId: user.googleId }});
         console.log(data);
         const writings = []
         for(const d in data.cards) {
