@@ -6,9 +6,10 @@
 
 import { Close } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
+import Backend from '../../axios/Backend';
 
 import Styles from './Profile.module.css';
 
@@ -26,13 +27,32 @@ const Profile = () => {
 
     // Firebase로부터 프로필 텍스트 가져오기
     const fetchData = async () => {
-        const data = await (await fetch('https://software-engineering-3team-default-rtdb.firebaseio.com/profile.json', { method: 'GET' })).json();
-        setProfileText(data.profileText);
+        const data = await Backend('profile', {
+            method: "GET",
+            headers: {
+                accessToken: user.token,
+            },
+            params: {
+                googleId: user.googleId,
+            }
+        })
+        setProfileText(data.text);
     }
 
     // Firebase에 새로운 프로필 텍스트 저장하기
     const updateData = async () => {
-        await fetch('https://software-engineering-3team-default-rtdb.firebaseio.com/profile.json', { method: 'PUT', body: JSON.stringify({ profileText: inputRef.current.value }) });
+        await Backend('profile', {
+            method: "POST",
+            headers: {
+                accessToken: user.token,
+            },
+            params: {
+                googleId: user.googleId,
+            },
+            data: JSON.stringify({
+                text: inputRef.current.value,
+            })
+        })
     }
 
     useEffect(() => {
