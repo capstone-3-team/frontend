@@ -17,6 +17,7 @@ const Login = () => {
     useEffect(() => {
         const interval = setInterval(
             async () => {
+                console.log(document.cookie)
                 if(document.cookie !== "") {
                     const token = document.cookie.replace("data=", "");
                     const userData = await (await Backend("info", {method:"GET", headers: {accessToken: token}})).data;
@@ -28,7 +29,7 @@ const Login = () => {
                     })
                     win.close();
                 }
-            }, 1000
+            }, 100
         )
         return () => {
             clearInterval(interval);
