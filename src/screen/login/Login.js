@@ -29,7 +29,7 @@ const Login = () => {
                     })
                     win.close();
                 }
-            }, 100
+            }, 1000
         )
         return () => {
             clearInterval(interval);
