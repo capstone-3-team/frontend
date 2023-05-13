@@ -27,6 +27,7 @@ const Login = () => {
     }
 
     useEffect(() => {
+        document.location.reload();
         const interval = setInterval(
             () => {
                 console.log(document.cookie)
