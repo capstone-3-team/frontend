@@ -35,8 +35,8 @@ const Profile = () => {
             params: {
                 googleId: user.googleId,
             }
-        }).data;
-        setProfileText(data.text);
+        });
+        setProfileText(data.data.text);
     }
 
     // Firebase에 새로운 프로필 텍스트 저장하기

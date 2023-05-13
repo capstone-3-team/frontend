@@ -134,7 +134,7 @@ const GPT = () => {
                                                     className={Styles.cardWrite}
                                                     onClick={() => {
                                                         console.log(answers[index]);
-                                                        navigate(`/main/write?content=${answers[index]}`, { state: { content: answers[index] } });
+                                                        navigate(`/main/write`, {replace: false} ,{ state: { content: answers[index] } });
                                                     }}
                                                 >
                                                     카드 작성하기
