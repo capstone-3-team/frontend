@@ -14,20 +14,24 @@ const Login = () => {
 
     let win = null;
 
+    const getData = async () => {
+        const token = document.cookie.replace("data=", "");
+        const userData = await (await Backend("info", {method:"GET", headers: {accessToken: token}})).data;
+        setUser({
+            token: token,
+            googleId: userData.googleId,
+            googleName: userData.googleName,
+            profilePicture: userData.profilePicture,
+        })
+        win.close();
+    }
+
     useEffect(() => {
         const interval = setInterval(
-            async () => {
+            () => {
                 console.log(document.cookie)
                 if(document.cookie !== "") {
-                    const token = document.cookie.replace("data=", "");
-                    const userData = await (await Backend("info", {method:"GET", headers: {accessToken: token}})).data;
-                    setUser({
-                        token: token,
-                        googleId: userData.googleId,
-                        googleName: userData.googleName,
-                        profilePicture: userData.profilePicture,
-                    })
-                    win.close();
+                    getData();
                 }
             }, 100
         )
