@@ -17,7 +17,6 @@ const Login = () => {
     useEffect(() => {
         const interval = setInterval(
             async () => {
-                window.location.reload();
                 if(document.cookie !== "") {
                     const token = document.cookie.replace("data=", "");
                     const userData = await (await Backend("info", {method:"GET", headers: {accessToken: token}})).data;
