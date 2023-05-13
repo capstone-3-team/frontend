@@ -48,7 +48,7 @@ const GPT = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const URI = "https://maceter636-8874416364.hf.space/proxy/openai/v1/chat/completions"
+    const URI = "https://bogguiri-waifuplss.hf.space/proxy/openai/v1/chat/completions"
     const body = {
         model : "gpt-3.5-turbo",
         messages: [
