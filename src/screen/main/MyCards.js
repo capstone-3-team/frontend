@@ -59,7 +59,7 @@ const MyCards = () => {
             <div className={Styles.cardsDiv}>
                 {
                     cards.map((item) => {
-                        return <Card key={item.writtenDate.toString()} card={item} style={{width: '280px', margin: '0px 30px 30px 0px'}}/>
+                        return <Card key={item.writtenDate} card={item} style={{width: '280px', margin: '0px 30px 30px 0px'}}/>
                     })
                 }
             </div>
