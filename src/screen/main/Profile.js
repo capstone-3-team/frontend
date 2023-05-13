@@ -35,7 +35,7 @@ const Profile = () => {
             params: {
                 googleId: user.googleId,
             }
-        })
+        }).data;
         setProfileText(data.text);
     }
 
