@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import queryString from "query-string"
 import { useEffect } from 'react';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Callback = () => {
 
@@ -21,7 +22,7 @@ const Callback = () => {
     const [show, setShow] = useState(null);
 
     const process = async () => {
-        const tokenData = await fetch(
+        let tokenData = await axios(
             token_uri,
             {
                 method: 'POST',
@@ -33,7 +34,8 @@ const Callback = () => {
                     grant_type: "authorization_code"
                 }
             }
-        ).json();
+        )
+        tokenData = tokenData.data;
         console.log(tokenData);
     }
 
