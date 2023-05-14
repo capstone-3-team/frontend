@@ -34,6 +34,7 @@ const Callback = () => {
                 }
             }
         )
+        console.log(tokenData);
     }
 
     useEffect(
@@ -44,7 +45,7 @@ const Callback = () => {
 
     return (
         <div>
-            {show}
+        
         </div>
     )
 
