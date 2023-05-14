@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { client_id, client_secret, redirect_url, resource_uri, token_uri } from './Const'
+import Backend from './axios/Backend';
+import { useRecoilState } from 'recoil';
+import User from './state/User';
 
 const Callback = () => {
 
@@ -15,6 +18,8 @@ const Callback = () => {
     let { code } = queryString.parse(search);
 
     const [show, setShow] = useState(null);
+
+    const [user, setUser] = useRecoilState(User);
 
     const process = async () => {
         let tokenData = await axios(
@@ -54,6 +59,18 @@ const Callback = () => {
             googleName: userData.name,
             googleId: userData.id,
             profilePicture: userData.picture,
+        }
+
+        const answer = await Backend(
+            'auth',
+            {
+                method: 'POST',
+                data: JSON.stringify(finalData),
+            }
+        )
+
+        if(answer.status == 200) {
+            setUser(finalData);
         }
 
         console.log(finalData);
