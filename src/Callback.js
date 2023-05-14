@@ -32,6 +32,9 @@ const Callback = () => {
                     client_secret : client_secret,
                     redirect_url: redirect_url,
                     grant_type: "authorization_code"
+                },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
                 }
             }
         )
