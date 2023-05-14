@@ -7,7 +7,9 @@ const Callback = () => {
 
     const params = useParams();
 
-    console.log(params);
+    let code = params.search.replace("?code=", "");
+
+    console.log(code);
 
     return (
         <p>callback</p>
