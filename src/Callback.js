@@ -69,6 +69,8 @@ const Callback = () => {
             }
         )
 
+        console.log(answer);
+
         if(answer.status == 200) {
             setUser(finalData);
         }
