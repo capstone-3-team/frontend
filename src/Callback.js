@@ -4,14 +4,9 @@ import queryString from "query-string"
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { client_id, client_secret, redirect_url, resource_uri, token_uri } from './Const'
 
 const Callback = () => {
-
-    const client_id = "124283716814-jgmcllojhr4728ifsqbrphc6i972qvov.apps.googleusercontent.com";
-    const client_secret = "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";
-    const redirect_url = "https://quickthink.online/callback";
-    const token_uri = "https://oauth2.googleapis.com/token";
-    const recource_uri = "https://www.googleapis.com/oauth2/v2/userinfo";
 
     const navigate = useNavigate();
 
@@ -39,7 +34,30 @@ const Callback = () => {
             }
         )
         tokenData = tokenData.data;
-        console.log(tokenData);
+        
+        let accessToken = tokenData.access_token;
+
+        let userData = await axios(
+            resource_uri,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + accessToken,
+                }
+            }
+        )
+
+        userData = userData.data;
+
+        let finalData = {
+            token: accessToken,
+            accessToken: userData.access_token,
+            googleName: userData.name,
+            googleId: userData.id,
+            profilePicture: userData.profilePicture,
+        }
+
+        console.log(finalData);
     }
 
     useEffect(
