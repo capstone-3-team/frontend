@@ -30,7 +30,7 @@ const Callback = () => {
                     code: code,
                     client_id: client_id,
                     client_secret : client_secret,
-                    redirect_url: redirect_url,
+                    redirect_uri: redirect_url,
                     grant_type: "authorization_code"
                 },
                 headers: {
