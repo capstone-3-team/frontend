@@ -33,7 +33,7 @@ const Callback = () => {
                     grant_type: "authorization_code"
                 }
             }
-        )
+        ).json();
         console.log(tokenData);
     }
 
