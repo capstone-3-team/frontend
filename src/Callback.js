@@ -1,18 +1,16 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Callback = () => {
 
     const navigate = useNavigate();
 
-    const params = useParams();
+    const location = useLocation();
 
-    let code = params.search.replace("?code=", "");
-
-    console.log(code);
+    const code = location.search.replace("?code=", "");
 
     return (
-        <p>callback</p>
+        <p>{code}</p>
     )
 
 }
