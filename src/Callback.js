@@ -10,8 +10,8 @@ const Callback = () => {
     const client_id = "124283716814-jgmcllojhr4728ifsqbrphc6i972qvov.apps.googleusercontent.com";
     const client_secret = "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";
     const redirect_url = "https://quickthink.online/callback";
-    const token_uri = "https://quickthink.online/callback";
-    const recource_uri = "https://quickthink.online/callback";
+    const token_uri = "https://oauth2.googleapis.com/token";
+    const recource_uri = "https://www.googleapis.com/oauth2/v2/userinfo";
 
     const navigate = useNavigate();
 
