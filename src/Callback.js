@@ -51,10 +51,9 @@ const Callback = () => {
 
         let finalData = {
             token: accessToken,
-            accessToken: userData.access_token,
             googleName: userData.name,
             googleId: userData.id,
-            profilePicture: userData.profilePicture,
+            profilePicture: userData.picture,
         }
 
         console.log(finalData);
