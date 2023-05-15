@@ -6,6 +6,7 @@ import Card from '../../components/Card';
 import Backend from '../../axios/Backend';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
+import { SentimentDissatisfied } from '@mui/icons-material';
 
 const MyCards = () => {
 
@@ -132,6 +133,15 @@ const MyCards = () => {
                     style={{ whiteSpace: 'pre-wrap' }}
                     visible={true}
                 />
+            </div>
+        )
+    }
+
+    if(cards.length == 0) {
+        return (
+            <div className={Styles.emptyDiv}>
+                <SentimentDissatisfied className={Styles.emptyText} />
+                <p className={Styles.emptyText}>카드가 없습니다. 우 상단 작성 버튼으로 새로운 카드를 작성해주세요</p>
             </div>
         )
     }

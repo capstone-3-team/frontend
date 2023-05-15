@@ -7,6 +7,7 @@ import Card from '../../components/Card';
 
 import Styles from './OthersCard.module.css';
 import { TailSpin } from 'react-loader-spinner';
+import { SentimentDissatisfied } from '@mui/icons-material';
 
 const OthersCard = () => {
 
@@ -199,7 +200,7 @@ const OthersCard = () => {
                 </div>
             }
             {
-                isLoading
+                isLoading && cards.length != 0
                 ?
                 <div className={Styles.spinnerDiv}>
                     <TailSpin
@@ -269,6 +270,14 @@ const OthersCard = () => {
                         })
                     }
                 </div>
+                </div>
+            }
+            {
+                cards.length == 0
+                &&
+                <div className={Styles.emptyDiv}>
+                    <SentimentDissatisfied className={Styles.emptyText} />
+                    <p className={Styles.emptyText}>해당 사용자가 작성한 카드가 없습니다.</p>
                 </div>
             }
         </div>

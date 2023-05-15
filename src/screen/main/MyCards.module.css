@@ -27,3 +27,16 @@
     width: 950px;
     flex-wrap: wrap;
 }
+
+.emptyDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+    justify-content: center;
+}
+
+.emptyText {
+    font-size: 24px;
+    font-weight: bold;
+}
