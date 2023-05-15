@@ -11,7 +11,7 @@ const Login = () => {
                 <p className={Styles.mainText}>서비스 사용을 위해 구글 로그인을 해 주세요</p>
                 <img src={LoginImage} className={Styles.loginImage} onClick={() => {
                     document.location.reload();
-                    window.open('http://api.quickthink.online:8080/api/google', "_self")
+                    window.open('https://api.quickthink.online/api/google', "_self")
                 }}/>
             </div>
         )
