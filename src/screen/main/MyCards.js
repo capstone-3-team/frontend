@@ -4,7 +4,7 @@ import { TailSpin } from 'react-loader-spinner';
 import Styles from './MyCards.module.css';
 import Card from '../../components/Card';
 import Backend from '../../axios/Backend';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
 
 const MyCards = () => {
@@ -15,6 +15,8 @@ const MyCards = () => {
     
     const [hashTags, setHashTags] = useState([]);
     const [render, setRender] = useState(false);
+
+    const resetUser = useResetRecoilState(User);
 
     const fetchNewCard = async () => {
 
@@ -38,6 +40,10 @@ const MyCards = () => {
                 })
             }
         );
+
+        if(data.status == 401) {
+            resetUser();
+        }
 
         data = data.data;
         const writings = []
@@ -64,6 +70,10 @@ const MyCards = () => {
             }
         )
 
+        if(hashTags.status == 401) {
+            resetUser();
+        }
+
         hashTags = hashTags.data.hashTags;
         let hashTagList = [];
         for(const hashTag of hashTags) {
@@ -87,6 +97,10 @@ const MyCards = () => {
                     })
                 }
             );
+
+        if(data.status == 401) {
+            resetUser();
+        }
 
         data = data.data;
         const writings = []

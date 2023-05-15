@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import Backend from '../../axios/Backend';
 import User from '../../state/User';
 import Styles from './SearchPeople.module.css';
@@ -17,6 +17,8 @@ const SearchPeople = () => {
 
     const navigate = useNavigate();
 
+    const resetUser = useResetRecoilState(User);
+
     const searchData = async () => {
         let data = await Backend(
             'search',
@@ -30,6 +32,9 @@ const SearchPeople = () => {
                 }
             }
         )
+        if(data.status == 401) {
+            resetUser();
+        }
         setUsers(data.data.userList.filter(item => item.googleName != user.googleName))
     }
 

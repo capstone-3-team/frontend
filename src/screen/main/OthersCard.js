@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
 import Backend from '../../axios/Backend';
 import Card from '../../components/Card';
@@ -20,6 +20,7 @@ const OthersCard = () => {
 
     const [hashTags, setHashTags] = useState([]);
     const [render, setRender] = useState(false);
+    const resetUser = useResetRecoilState(User);
 
     const fetchNewCard = async () => {
 
@@ -35,6 +36,12 @@ const OthersCard = () => {
                 },
             }
         )
+
+        if(personData.status == 401) {
+            resetUser();
+        }
+
+
         let person = personData.data;
 
         let hash = [];
@@ -57,6 +64,10 @@ const OthersCard = () => {
                 })
             }
         );
+
+        if(data.status == 401) {
+            resetUser();
+        }
 
         data = data.data;
 
@@ -83,6 +94,11 @@ const OthersCard = () => {
                 },
             }
         )
+
+        if(personData.status == 401) {
+            resetUser();
+        }
+
         let person = personData.data;
 
         let hashTags = await Backend(
@@ -97,6 +113,10 @@ const OthersCard = () => {
                 },
             }
         )
+
+        if(hashTags.status == 401) {
+            resetUser();
+        }
 
         hashTags = hashTags.data.hashTags;
         let hashTagList = [];
@@ -122,6 +142,10 @@ const OthersCard = () => {
                 }
             );
 
+        if(data.status == 401) {
+            resetUser();
+        }
+
         data = data.data;
 
         const writings = []
@@ -146,6 +170,11 @@ const OthersCard = () => {
                 },
             }
         )
+
+        if(personData.status == 401) {
+            resetUser();
+        }
+
         setPerson(personData.data);
     }
 

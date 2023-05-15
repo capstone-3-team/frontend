@@ -41,7 +41,7 @@ const Profile = () => {
 
     // Firebase에 새로운 프로필 텍스트 저장하기
     const updateData = async () => {
-        await Backend('profile', {
+        const output = await Backend('profile', {
             method: "POST",
             headers: {
                 accessToken: user.token,
@@ -53,6 +53,9 @@ const Profile = () => {
                 text: inputRef.current.value,
             })
         })
+        if(output.status == 401) {
+            resetUser();
+        }
     }
 
     useEffect(() => {

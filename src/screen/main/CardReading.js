@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TailSpin } from 'react-loader-spinner';
 
 import Styles from './CardReading.module.css'
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import User from '../../state/User';
 import { useEffect } from 'react';
 import MDEditor from '@uiw/react-md-editor';
@@ -67,6 +67,8 @@ const CardReading = () => {
 
     const { id } = useParams()
 
+    const resetUser = useResetRecoilState(User);
+
     const fetchCard = async () => {
         let data = await Backend('card/single',{
             method: "GET",
@@ -77,6 +79,11 @@ const CardReading = () => {
                 cardId: id
             }
         });
+
+        if(data.status == 401) {
+            resetUser();
+        }
+
         data = data.data;
         console.log(data);
         setCard(data);
@@ -120,7 +127,7 @@ const CardReading = () => {
                         &&
                         <p className={Styles.topButton} onClick={
                             async () => {
-                                await Backend(
+                                const output = await Backend(
                                     'card/remove',
                                     {
                                         method: "DELETE",
@@ -132,6 +139,9 @@ const CardReading = () => {
                                         }
                                     }
                                 )
+                                if(output.status == 401) {
+                                    resetUser();
+                                }
                                 navigate('/main', {replace: true})
                             }
                         }>삭제하기</p>
@@ -196,7 +206,7 @@ const CardReading = () => {
                     <div 
                         className={Styles.bottomCompleteDiv}
                         onClick={ async () => {
-                            await Backend(
+                            const output = await Backend(
                                 'card/review',
                                 {
                                     method: "POST",
@@ -208,6 +218,9 @@ const CardReading = () => {
                                     }
                                 }
                             )
+                            if(output.status == 401) {
+                                resetUser();
+                            }
                             navigate('/main', {replace: true})
                         }}
                     >

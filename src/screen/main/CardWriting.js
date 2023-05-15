@@ -10,7 +10,7 @@ import { getCodeString } from 'rehype-rewrite';
 import katex from 'katex';
 
 import User from '../../state/User';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 import Backend, {axios_wtoken} from '../../axios/Backend';
 
@@ -34,7 +34,10 @@ const CardWriting = () => {
     const user = useRecoilValue(User);
 
     const newHashtagRef = useRef(null);
+
     const titleRef = useRef(null);
+
+    const resetUser = useResetRecoilState(User);
 
     const fetchCard = async () => {
         const cardData = {
@@ -46,13 +49,16 @@ const CardWriting = () => {
             reviewCount: 0,
         }
         console.log(JSON.stringify(cardData))
-        await Backend('card/write', {
+        const output = await Backend('card/write', {
             method: 'POST',
             headers: {
                 accessToken: user.token,
             },
             data: JSON.stringify(cardData)
         });
+        if(output.status == 401) {
+            resetUser();
+        }
     }
 
     return (

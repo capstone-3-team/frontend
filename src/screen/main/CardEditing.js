@@ -10,7 +10,7 @@ import { getCodeString } from 'rehype-rewrite';
 import katex from 'katex';
 
 import User from '../../state/User';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 import Backend from '../../axios/Backend';
 import { useEffect } from 'react';
@@ -38,6 +38,8 @@ const CardEditing = () => {
 
     const { id } = useParams()
 
+    const resetUser = useResetRecoilState(User);
+
     useEffect(() => {
         fetchCard();
     }, [])
@@ -52,6 +54,11 @@ const CardEditing = () => {
                 cardId: id
             }
         });
+
+        if(data.status == 401) {
+            resetUser();
+        }
+
         data = data.data;
         
         setTitle(data.title);
@@ -71,7 +78,7 @@ const CardEditing = () => {
             writtenDate: new Date(),
         }
 
-        await Backend('card/edit', {
+        const output = await Backend('card/edit', {
             method: 'PUT',
             headers: {
                 accessToken: user.token,
@@ -81,6 +88,10 @@ const CardEditing = () => {
             },
             data: JSON.stringify(cardData)
         });
+
+        if(output.status == 401) {
+            resetUser();
+        }
     }
 
     return (
