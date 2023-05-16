@@ -203,6 +203,7 @@ const CardWriting = () => {
                         } else {
                             fetchCard();
                             navigate('/main', {replace: false});
+                            navigate(0);
                         }
                     }}
                 >
