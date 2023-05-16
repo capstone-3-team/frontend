@@ -236,6 +236,7 @@ const CardEditing = () => {
                         } else {
                             putCard();
                             navigate('/main', {replace: false});
+                            navigate(0);
                         }
                     }}
                 >
