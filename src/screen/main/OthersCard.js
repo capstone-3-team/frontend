@@ -36,11 +36,9 @@ const OthersCard = () => {
                     googleId: id,
                 },
             }
-        )
-
-        if(personData.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
 
 
         let person = personData.data;
@@ -64,11 +62,10 @@ const OthersCard = () => {
                     hashTags: hash,
                 })
             }
-        );
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        });
 
-        if(data.status == 401) {
-            resetUser();
-        }
 
         data = data.data;
 
@@ -94,11 +91,9 @@ const OthersCard = () => {
                     googleId: id,
                 },
             }
-        )
-
-        if(personData.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
 
         let person = personData.data;
 
@@ -113,12 +108,9 @@ const OthersCard = () => {
                     googleId: person.googleId 
                 },
             }
-        )
-
-        if(hashTags.status == 401) {
-            resetUser();
-        }
-
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
         hashTags = hashTags.data.hashTags;
         let hashTagList = [];
         for(const hashTag of hashTags) {
@@ -141,11 +133,9 @@ const OthersCard = () => {
                         hashTags: [],
                     })
                 }
-            );
-
-        if(data.status == 401) {
-            resetUser();
-        }
+            ).catch(err => {
+                if(err.response.status == 401) resetUser();
+            })
 
         data = data.data;
 
@@ -170,11 +160,9 @@ const OthersCard = () => {
                     googleId: id,
                 },
             }
-        )
-
-        if(personData.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
 
         setPerson(personData.data);
     }

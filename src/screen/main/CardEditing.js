@@ -53,11 +53,9 @@ const CardEditing = () => {
             params: {
                 cardId: id
             }
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         });
-
-        if(data.status == 401) {
-            resetUser();
-        }
 
         data = data.data;
         
@@ -87,11 +85,9 @@ const CardEditing = () => {
                 cardId: id,
             },
             data: JSON.stringify(cardData)
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         });
-
-        if(output.status == 401) {
-            resetUser();
-        }
     }
 
     return (

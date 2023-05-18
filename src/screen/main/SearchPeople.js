@@ -31,10 +31,9 @@ const SearchPeople = () => {
                     searchName: state.search
                 }
             }
-        )
-        if(data.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
         setUsers(data.data.userList.filter(item => item.googleName != user.googleName))
     }
 

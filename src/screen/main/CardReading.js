@@ -78,6 +78,8 @@ const CardReading = () => {
             params: {
                 cardId: id
             }
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         });
 
         if(data.status == 401) {
@@ -138,10 +140,9 @@ const CardReading = () => {
                                             cardId: id
                                         }
                                     }
-                                )
-                                if(output.status == 401) {
-                                    resetUser();
-                                }
+                                ).catch(err => {
+                                    if(err.response.status == 401) resetUser();
+                                });
                                 navigate('/main', {replace: true})
                             }
                         }>삭제하기</p>
@@ -217,10 +218,9 @@ const CardReading = () => {
                                         cardId: id
                                     }
                                 }
-                            )
-                            if(output.status == 401) {
-                                resetUser();
-                            }
+                            ).catch(err => {
+                                if(err.response.status == 401) resetUser();
+                            })
                             navigate('/main', {replace: true})
                         }}
                     >
