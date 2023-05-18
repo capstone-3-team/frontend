@@ -55,10 +55,9 @@ const CardWriting = () => {
                 accessToken: user.token,
             },
             data: JSON.stringify(cardData)
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         });
-        if(output.status == 401) {
-            resetUser();
-        }
     }
 
     return (

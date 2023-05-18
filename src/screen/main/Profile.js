@@ -35,6 +35,8 @@ const Profile = () => {
             params: {
                 googleId: user.googleId,
             }
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         });
         setProfileText(data.data.text);
     }
@@ -52,10 +54,9 @@ const Profile = () => {
             data: JSON.stringify({
                 text: inputRef.current.value,
             })
+        }).catch(err => {
+            if(err.response.status == 401) resetUser();
         })
-        if(output.status == 401) {
-            resetUser();
-        }
     }
 
     useEffect(() => {

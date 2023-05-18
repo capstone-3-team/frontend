@@ -40,11 +40,9 @@ const MyCards = () => {
                     hashTags: hash,
                 })
             }
-        );
-
-        if(data.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        });
 
         data = data.data;
         const writings = []
@@ -69,11 +67,9 @@ const MyCards = () => {
                     googleId: user.googleId 
                 },
             }
-        )
-
-        if(hashTags.status == 401) {
-            resetUser();
-        }
+        ).catch(err => {
+            if(err.response.status == 401) resetUser();
+        })
 
         hashTags = hashTags.data.hashTags;
         let hashTagList = [];
@@ -97,11 +93,9 @@ const MyCards = () => {
                         hashTags: [],
                     })
                 }
-            );
-
-        if(data.status == 401) {
-            resetUser();
-        }
+            ).catch(err => {
+                if(err.response.status == 401) resetUser();
+            });
 
         data = data.data;
         const writings = []
