@@ -235,6 +235,14 @@ const CardEditing = () => {
                             navigate(0);
                         }
                     }}
+                    onTouchStart={() => {
+                        if(titleRef.current.value == "" || value == "") {
+                            alert('제목과 글은 빈칸이여선 안됩니다.');
+                        } else {
+                            putCard();
+                            navigate('/main', {replace: false});
+                        }
+                    }}
                 >
                     <span>수정 완료</span>
                 </div>
