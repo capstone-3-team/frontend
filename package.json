@@ -12,7 +12,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@uiw/react-md-editor": "^3.20.6",
     "axios": "^1.4.0",
-    "dotenv": "^16.0.3",
     "embedded-react-browser": "^0.0.4",
     "iframe-resizer-react": "^1.1.0",
     "katex": "^0.16.4",

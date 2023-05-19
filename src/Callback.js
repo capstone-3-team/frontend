@@ -8,11 +8,9 @@ import { redirect_url, resource_uri, token_uri } from './Const'
 import Backend from './axios/Backend';
 import { useRecoilState } from 'recoil';
 import User from './state/User';
-import dotenv from 'dotenv';
 
 const Callback = () => {
 
-    dotenv.config();
 
     const navigate = useNavigate();
 
