@@ -21,7 +21,7 @@ const Callback = () => {
 
     const [user, setUser] = useRecoilState(User);
 
-    const process = async () => {
+    const task = async () => {
         let tokenData = await axios(
             token_uri,
             {
@@ -78,7 +78,7 @@ const Callback = () => {
 
     useEffect(
         () => {
-            process();
+            task();
         }, []
     )
 
