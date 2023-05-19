@@ -11,7 +11,6 @@ import User from './state/User';
 
 const Callback = () => {
 
-
     const navigate = useNavigate();
 
     const { search } = useLocation();
