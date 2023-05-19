@@ -48,7 +48,7 @@ const GPT = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const URI = "https://bogguiri-waifuplss.hf.space/proxy/openai/v1/chat/completions"
+    const URI = "https://api.openai.com/v1/chat/completions"
     const body = {
         model : "gpt-3.5-turbo",
         messages: [
@@ -66,11 +66,14 @@ const GPT = () => {
 
     const queryToGpt = async () => {
         body.messages[1].content = questionRef.current.value;
+
+        console.log(process.env.REACT_APP_GPT);
         const answer = await fetch(URI, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + process.env.REACT_APP_GPT,
             },
             mode: 'cors',
         }).then(
