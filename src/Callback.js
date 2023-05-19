@@ -4,7 +4,7 @@ import queryString from "query-string"
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { client_id, client_secret, redirect_url, resource_uri, token_uri } from './Const'
+import { redirect_url, resource_uri, token_uri } from './Const'
 import Backend from './axios/Backend';
 import { useRecoilState } from 'recoil';
 import User from './state/User';
@@ -28,8 +28,8 @@ const Callback = () => {
                 method: 'POST',
                 params: {
                     code: code,
-                    client_id: client_id,
-                    client_secret : client_secret,
+                    client_id: process.env.REACT_APP_CLIENT_ID,
+                    client_secret : process.env.REACT_APP_CLIENT_SECRET,
                     redirect_uri: redirect_url,
                     grant_type: "authorization_code"
                 },
