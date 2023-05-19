@@ -206,6 +206,7 @@ const CardWriting = () => {
                         }
                     }}
                     onTouchStart={() => {
+                        console.log("touched!")
                         if(titleRef.current.value == "" || value == "") {
                             alert('제목과 글은 빈칸이여선 안됩니다.');
                         } else {
