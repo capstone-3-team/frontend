@@ -49,7 +49,7 @@ const CardWriting = () => {
             reviewCount: 0,
         }
         console.log(JSON.stringify(cardData))
-        const output = await Backend('card/write', {
+        await Backend('card/write', {
             method: 'POST',
             headers: {
                 accessToken: user.token,
@@ -197,6 +197,15 @@ const CardWriting = () => {
                 <div 
                     className={Styles.bottomCompleteDiv}
                     onClick={() => {
+                        if(titleRef.current.value == "" || value == "") {
+                            alert('제목과 글은 빈칸이여선 안됩니다.');
+                        } else {
+                            fetchCard();
+                            navigate('/main', {replace: false});
+                            navigate(0);
+                        }
+                    }}
+                    onTouchStart={() => {
                         if(titleRef.current.value == "" || value == "") {
                             alert('제목과 글은 빈칸이여선 안됩니다.');
                         } else {
