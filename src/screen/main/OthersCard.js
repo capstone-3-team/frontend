@@ -38,6 +38,7 @@ const OthersCard = () => {
             }
         ).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         })
 
 
@@ -64,6 +65,7 @@ const OthersCard = () => {
             }
         ).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         });
 
 
@@ -93,6 +95,7 @@ const OthersCard = () => {
             }
         ).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         })
 
         let person = personData.data;
@@ -110,6 +113,7 @@ const OthersCard = () => {
             }
         ).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         })
         hashTags = hashTags.data.hashTags;
         let hashTagList = [];
@@ -135,6 +139,7 @@ const OthersCard = () => {
                 }
             ).catch(err => {
                 if(err.response.status == 401) resetUser();
+                if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
             })
 
         data = data.data;
@@ -162,6 +167,7 @@ const OthersCard = () => {
             }
         ).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         })
 
         setPerson(personData.data);

@@ -80,6 +80,7 @@ const CardReading = () => {
             }
         }).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         });
 
         if(data.status == 401) {
@@ -142,6 +143,7 @@ const CardReading = () => {
                                     }
                                 ).catch(err => {
                                     if(err.response.status == 401) resetUser();
+                                    if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
                                 });
                                 navigate('/main', {replace: true})
                             }
@@ -220,6 +222,7 @@ const CardReading = () => {
                                 }
                             ).catch(err => {
                                 if(err.response.status == 401) resetUser();
+                                if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
                             })
                             navigate('/main', {replace: true})
                         }}

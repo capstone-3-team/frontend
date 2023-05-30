@@ -57,6 +57,7 @@ const CardWriting = () => {
             data: JSON.stringify(cardData)
         }).catch(err => {
             if(err.response.status == 401) resetUser();
+            if(err.response.status == 400) alert("잘못된 요청을 전송했습니다!");
         });
     }
 
