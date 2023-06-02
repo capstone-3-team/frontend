@@ -271,9 +271,9 @@ const OthersCard = () => {
                 &&
                 <div className={Styles.emptyDiv}>
                     <SentimentDissatisfied className={Styles.emptyText} />
-                    <p className={Styles.emptyText}>해당 사용자가 작성한 카드가 없습니다.</p>
+                    <p className={Styles.emptyText}>카드가 없거나, 해당 해시태그들을 모두 가진 카드가 존재하지 않습니다.</p>
                 </div>
-            }
+                }
         </div>
     )
 }

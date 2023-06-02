@@ -133,15 +133,6 @@ const MyCards = () => {
         )
     }
 
-    if(cards.length == 0) {
-        return (
-            <div className={Styles.emptyDiv}>
-                <SentimentDissatisfied className={Styles.emptyText} />
-                <p className={Styles.emptyText}>카드가 없습니다. 우 상단 작성 버튼으로 새로운 카드를 작성해주세요</p>
-            </div>
-        )
-    }
-
     return (
         <div className={Styles.mainDiv}>
             <div className={Styles.hashtagsDiv}>
@@ -191,6 +182,14 @@ const MyCards = () => {
                 }
             </div>
             <div className={Styles.cardsDiv}>
+                {
+                    cards.length == 0
+                    &&
+                    <div className={Styles.emptyDiv}>
+                        <SentimentDissatisfied className={Styles.emptyText} />
+                        <p className={Styles.emptyText}>카드가 없거나, 해당 해시태그들을 모두 가진 카드가 존재하지 않습니다.</p>
+                    </div>
+                }
                 {
                     cards.map((item) => {
                         return <Card key={item.writtenDate} card={item} style={{width: '280px', margin: '0px 30px 30px 0px'}}/>
