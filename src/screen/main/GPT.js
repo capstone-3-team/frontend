@@ -66,8 +66,6 @@ const GPT = () => {
 
     const queryToGpt = async () => {
         body.messages[1].content = questionRef.current.value;
-
-        console.log(process.env.REACT_APP_GPT);
         const answer = await fetch(URI, {
             method: 'POST',
             body: JSON.stringify(body),
